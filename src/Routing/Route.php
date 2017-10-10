@@ -5,6 +5,11 @@ namespace Seaon\Routing;
 class Route
 {
     protected $namespace = 'App\Controller';
+    
+    public function __construct()
+    {
+        # do
+    }
 
     public function run()
     {
@@ -13,10 +18,9 @@ class Route
         $params = explode('/', $uri);
 
         if (count($params) != 2) {
-
             // $default_controller = DEFAULT_CONTROLLER;
             // $default_method = DEFAULT_METHOD;
-        }else{
+        } else {
             $controller = $params[0];
             $method = $params[1];
         }
@@ -24,12 +28,15 @@ class Route
         $controller = $this->namespace.'\\'.$controller."Controller";
 
         $model = new $controller;
-        if(!method_exists($controller, $method)){
-
+        if (!method_exists($controller, $method)) {
             exit("fangfnot");
         }
 
         call_user_func([$model, $method]);
     }
 
+    public function abc()
+    {
+        return 123;
+    }
 }
